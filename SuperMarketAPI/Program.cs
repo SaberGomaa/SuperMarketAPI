@@ -1,12 +1,16 @@
 using Microsoft.AspNetCore.HttpOverrides;
 using SuperMarketAPI.Extensions;
+using NLog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(),"/nlog.config"));
+
 builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureCors();
+builder.Services.ConfigureLoggerService();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
