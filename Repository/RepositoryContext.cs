@@ -1,5 +1,6 @@
 ﻿using ECommerce.Models;
 using Microsoft.EntityFrameworkCore;
+using Repository.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,10 @@ namespace Repository
     {
         public RepositoryContext(DbContextOptions options) : base(options) { }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.ApplyConfiguration(new AdminsConfguration());
+        }
         public DbSet<Admin> admins { get; set; }
         public DbSet<Customer> customers { get; set; }
         public DbSet<Cart> carts { get; set; }

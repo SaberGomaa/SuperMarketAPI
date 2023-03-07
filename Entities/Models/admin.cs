@@ -14,14 +14,14 @@ namespace ECommerce.Models
         public string Img { get; set; }
         public string Phone { get; set; }
 
-        public int customer_id { get; set; }
-        public int product_id { get; set; }
+        public int? customer_id { get; set; }
+        public int? product_id { get; set; }
 
         [ForeignKey("product_id")]
-        public Product Product { get; set; }
+        public Product? Product { get; set; }
 
         [ForeignKey("customer_id")]
-        public Customer customer { get; set; }
+        public Customer? customer { get; set; }
 
     }
 }

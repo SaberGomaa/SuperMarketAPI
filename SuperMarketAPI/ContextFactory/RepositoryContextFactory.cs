@@ -14,7 +14,9 @@ namespace SuperMarketAPI.ContextFactory
                 .Build();
 
             var builder = new DbContextOptionsBuilder<RepositoryContext>()
-            .UseSqlServer(configuration.GetConnectionString("sqlConnection"));
+            .UseSqlServer(configuration.GetConnectionString("sqlConnection"),
+            b=>b.MigrationsAssembly("SuperMarketAPI"));
+
             return new RepositoryContext(builder.Options);
         }
     }
