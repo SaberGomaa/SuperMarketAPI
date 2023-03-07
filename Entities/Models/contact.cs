@@ -27,7 +27,7 @@ namespace ECommerce.Models
         public int customer_id { get; set; }
 
         [ForeignKey("customer_id")]
-        public customer customer { get; set; }
+        public Customer customer { get; set; }
 
     }
 }

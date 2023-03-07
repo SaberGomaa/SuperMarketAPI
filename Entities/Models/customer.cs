@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ECommerce.Models
 {
-    public class customer
+    public class Customer
     {
         [Key]
         public int Id { get; set; }
@@ -39,7 +39,7 @@ namespace ECommerce.Models
 
         public ICollection<Order> orders { get; set; }
         public ICollection<Cart> carts { get; set; }
-        public ICollection<admin> admins { get; set; }
+        public ICollection<Admin> admins { get; set; }
 
 
 

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ECommerce.Models
 {
-    public class admin
+    public class Admin
     {
         [Key]
         public int Id { get; set; }
@@ -21,7 +21,7 @@ namespace ECommerce.Models
         public Product Product { get; set; }
 
         [ForeignKey("customer_id")]
-        public customer customer { get; set; }
+        public Customer customer { get; set; }
 
     }
 }
