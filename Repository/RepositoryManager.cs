@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public sealed class RepositoryManager :IRepositoryManger
+    public sealed class RepositoryManager :IRepositoryManager
     {
         private readonly RepositoryContext _repositoryContext;
         private readonly Lazy<IAdminRepository> _adminRepository;

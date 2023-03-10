@@ -28,6 +28,6 @@ namespace SuperMarketAPI.Extensions
 
         // Repository Manager
         public static void ConfigureRepositoryManager(this IServiceCollection services) =>
-            services.AddScoped<IRepositoryManger, RepositoryManager>();
+            services.AddScoped<IRepositoryManager, RepositoryManager>();
     }
 }
