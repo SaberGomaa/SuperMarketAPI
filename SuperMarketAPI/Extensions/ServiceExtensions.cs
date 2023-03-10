@@ -1,6 +1,9 @@
 ﻿using Contracts;
 using LoggerService;
+using Microsoft.EntityFrameworkCore;
 using Repository;
+using Service;
+using Service.Contracts;
 
 namespace SuperMarketAPI.Extensions
 {
@@ -29,5 +32,15 @@ namespace SuperMarketAPI.Extensions
         // Repository Manager
         public static void ConfigureRepositoryManager(this IServiceCollection services) =>
             services.AddScoped<IRepositoryManager, RepositoryManager>();
+
+        // Service Manager
+        public static void ConfiguerServiceManager(this IServiceCollection services)=>
+            services.AddScoped<IServiceManager , ServiceManager>();
+
+        // SQL Context
+        public static void ConfigureSqlContext(this IServiceCollection services,IConfiguration configuration) =>
+            services.AddDbContext<RepositoryContext>(opts => 
+            opts.UseSqlServer(configuration
+                .GetConnectionString("sqlConnection")));
     }
 }
