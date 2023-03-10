@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using LoggerService;
+using Repository;
 
 namespace SuperMarketAPI.Extensions
 {
@@ -21,8 +22,12 @@ namespace SuperMarketAPI.Extensions
             {
             });
 
-
+        //Logger
         public static void ConfigureLoggerService(this IServiceCollection services) =>
             services.AddSingleton<ILoggerManager, LoggerManager>();
+
+        // Repository Manager
+        public static void ConfigureRepositoryManager(this IServiceCollection services) =>
+            services.AddScoped<IRepositoryManger, RepositoryManager>();
     }
 }
