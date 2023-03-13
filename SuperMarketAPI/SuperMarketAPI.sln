@@ -13,9 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "..\Entities\Ent
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "..\Repository\Repository.csproj", "{11D4B182-6F23-4676-978E-ECF73858B089}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.Contracts", "..\Service.Contracts\Service.Contracts.csproj", "{6DFD2A79-3DBB-449D-90E4-BDC38098A2B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service.Contracts", "..\Service.Contracts\Service.Contracts.csproj", "{6DFD2A79-3DBB-449D-90E4-BDC38098A2B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "..\Service\Service.csproj", "{3C2256DE-42EF-4FE7-A213-0F8B06C40CBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "..\Service\Service.csproj", "{3C2256DE-42EF-4FE7-A213-0F8B06C40CBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperMarket.Presentation", "..\SuperMarket.Presentation\SuperMarket.Presentation.csproj", "{ED024401-BD3D-4493-86B6-841BBF8166C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{3C2256DE-42EF-4FE7-A213-0F8B06C40CBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C2256DE-42EF-4FE7-A213-0F8B06C40CBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C2256DE-42EF-4FE7-A213-0F8B06C40CBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED024401-BD3D-4493-86B6-841BBF8166C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED024401-BD3D-4493-86B6-841BBF8166C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED024401-BD3D-4493-86B6-841BBF8166C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED024401-BD3D-4493-86B6-841BBF8166C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
