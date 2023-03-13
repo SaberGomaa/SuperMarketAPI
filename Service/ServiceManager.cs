@@ -18,7 +18,7 @@ namespace Service
         private readonly Lazy<IOrderService> _orderService;
         public ServiceManager(IRepositoryManager repositoryManager, ILoggerManager logger)
         {
-            _adminService = new Lazy<IAdminService>(() => new AdminIService(logger, repositoryManager));
+            _adminService = new Lazy<IAdminService>(() => new AdminService(logger, repositoryManager));
             _cartService = new Lazy<ICartService>(() => new CartService(repositoryManager, logger));
             _contactService = new Lazy<IContactService>(() => new ContactService(repositoryManager, logger));
             _customersService = new Lazy<ICustomerService>(() => new CustomerService(repositoryManager, logger));
