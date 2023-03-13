@@ -1,4 +1,5 @@
-﻿using Contracts;
+﻿using AutoMapper;
+using Contracts;
 using Service.Contracts;
 using System;
 using System.Collections.Generic;
@@ -16,14 +17,14 @@ namespace Service
         private readonly Lazy<ICustomerService> _customersService;
         private readonly Lazy<IContactService> _contactService;
         private readonly Lazy<IOrderService> _orderService;
-        public ServiceManager(IRepositoryManager repositoryManager, ILoggerManager logger)
+        public ServiceManager(IRepositoryManager repositoryManager, ILoggerManager logger , IMapper mapper)
         {
-            _adminService = new Lazy<IAdminService>(() => new AdminService(logger, repositoryManager));
-            _cartService = new Lazy<ICartService>(() => new CartService(repositoryManager, logger));
-            _contactService = new Lazy<IContactService>(() => new ContactService(repositoryManager, logger));
-            _customersService = new Lazy<ICustomerService>(() => new CustomerService(repositoryManager, logger));
-            _orderService = new Lazy<IOrderService>(() => new OrderService(repositoryManager, logger));
-            _productService = new Lazy<IProductService>(() => new ProductService(repositoryManager, logger));
+            _adminService = new Lazy<IAdminService>(() => new AdminService(logger, repositoryManager , mapper));
+            _cartService = new Lazy<ICartService>(() => new CartService(repositoryManager, logger , mapper));
+            _contactService = new Lazy<IContactService>(() => new ContactService(repositoryManager, logger, mapper));
+            _customersService = new Lazy<ICustomerService>(() => new CustomerService(repositoryManager, logger, mapper));
+            _orderService = new Lazy<IOrderService>(() => new OrderService(repositoryManager, logger, mapper));
+            _productService = new Lazy<IProductService>(() => new ProductService(repositoryManager, logger, mapper));
         }
 
         public IAdminService Admin => _adminService.Value;

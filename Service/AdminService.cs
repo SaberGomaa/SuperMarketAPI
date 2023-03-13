@@ -1,4 +1,5 @@
-﻿using Contracts;
+﻿using AutoMapper;
+using Contracts;
 using Models;
 using Service.Contracts;
 using Shared.DTO;
@@ -14,11 +15,12 @@ namespace Service
     {
         private readonly ILoggerManager _logger;
         private readonly IRepositoryManager _repository;
-
-        public AdminService(ILoggerManager logger, IRepositoryManager repository)
+        private readonly IMapper _mapper;
+        public AdminService(ILoggerManager logger, IRepositoryManager repository , IMapper mapper)
         {
             _logger = logger;
             _repository = repository;
+            _mapper = mapper;
         }
 
         public AdminDto GetAdmin(int id)
