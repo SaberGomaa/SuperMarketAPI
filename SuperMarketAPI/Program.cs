@@ -11,6 +11,7 @@ LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(),"/nlo
 builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureCors();
 builder.Services.ConfigureLoggerService();
+builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfiguerServiceManager();
 builder.Services.ConfigureSqlContext(builder.Configuration);
