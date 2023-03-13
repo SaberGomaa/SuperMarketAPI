@@ -29,7 +29,7 @@ namespace Service
             {
                 var admin = _repository.Admin.GetAdmin(id);
 
-                var adminDto = new AdminDto(admin.Id, admin.Name, admin.Email, admin.Password, admin.Address, admin.Img, admin.Phone);
+                var adminDto = _mapper.Map<AdminDto>(admin);
 
                 return adminDto;
             }
@@ -46,9 +46,10 @@ namespace Service
             {
                 var admins = _repository.Admin.GetAllAdmins();
 
-                var adminDto = admins.Select(c=> new AdminDto (c.Id, c.Name , c.Address , c.Password , c.Phone , c.Email , c.Img));
+                var adminDto = _mapper.Map<IEnumerable< AdminDto>>(admins);
 
                 return adminDto;
+
             }catch(Exception ex)
             {
                 _logger.LogError($"Error in {nameof(GetAllAdmins)} service method {ex}");

@@ -35,9 +35,16 @@ namespace SuperMarket.Presentation.Controllers
             try
             {
                 var admin = _service.Admin.GetAdmin(id);
-                return Ok(admin);
+                if (admin != null)
+                {
+                    return Ok(admin);
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
-            catch 
+            catch
             {
                 return StatusCode(500, "Internal Server Error");
             }
