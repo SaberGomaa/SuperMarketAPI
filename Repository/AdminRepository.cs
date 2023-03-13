@@ -14,11 +14,11 @@ namespace Repository
         {
         }
 
-        public Admin GetAdmin(int id , bool trackChanges) =>
-            FindByCondition(c => c.Id.Equals(id), trackChanges).SingleOrDefault();
+        public Admin GetAdmin(int id ) =>
+            FindByCondition(c => c.Id.Equals(id)).SingleOrDefault();
 
-        public IEnumerable<Admin> GetAllAdmins(bool trackChanges)=> 
-            FindAll(trackChanges)
+        public IEnumerable<Admin> GetAllAdmins()=> 
+            FindAll()
             .OrderBy(c=>c.Name)
             .ToList();
 

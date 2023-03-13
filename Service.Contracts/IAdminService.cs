@@ -10,7 +10,7 @@ namespace Service.Contracts
 {
     public interface IAdminService
     {
-        IEnumerable<AdminDto> GetAllAdmins(bool trackChanges);
-        AdminDto GetAdmin(int id, bool trackChanges);
+        IEnumerable<AdminDto> GetAllAdmins();
+        AdminDto GetAdmin(int id);
     }
 }

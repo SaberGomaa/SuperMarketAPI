@@ -21,11 +21,11 @@ namespace Service
             _repository = repository;
         }
 
-        public AdminDto GetAdmin(int id, bool trackChanges)
+        public AdminDto GetAdmin(int id)
         {
             try
             {
-                var admin = _repository.Admin.GetAdmin(id, trackChanges);
+                var admin = _repository.Admin.GetAdmin(id);
 
                 var adminDto = new AdminDto(admin.Id, admin.Name, admin.Email, admin.Password, admin.Address, admin.Img, admin.Phone);
 
@@ -38,11 +38,11 @@ namespace Service
             }
         }
 
-        public IEnumerable<AdminDto> GetAllAdmins(bool trackChanges)
+        public IEnumerable<AdminDto> GetAllAdmins()
         {
             try
             {
-                var admins = _repository.Admin.GetAllAdmins(trackChanges);
+                var admins = _repository.Admin.GetAllAdmins();
 
                 var adminDto = admins.Select(c=> new AdminDto (c.Id, c.Name , c.Address , c.Password , c.Phone , c.Email , c.Img));
 

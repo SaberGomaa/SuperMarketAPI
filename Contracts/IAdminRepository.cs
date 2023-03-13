@@ -9,7 +9,7 @@ namespace Contracts
 {
     public interface IAdminRepository
     {
-        IEnumerable<Admin> GetAllAdmins(bool trackChanges);
-        Admin GetAdmin(int id ,bool trackChanges);
+        IEnumerable<Admin> GetAllAdmins();
+        Admin GetAdmin(int id );
     }
 }

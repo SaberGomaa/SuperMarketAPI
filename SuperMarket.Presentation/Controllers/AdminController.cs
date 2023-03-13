@@ -20,7 +20,7 @@ namespace SuperMarket.Presentation.Controllers
         {
             try
             {
-                var admins = _service.Admin.GetAllAdmins(trackChanges: false);
+                var admins = _service.Admin.GetAllAdmins();
                 return Ok(admins);
             } catch
             {
@@ -34,7 +34,7 @@ namespace SuperMarket.Presentation.Controllers
         {
             try
             {
-                var admin = _service.Admin.GetAdmin(id:id , trackChanges: false);
+                var admin = _service.Admin.GetAdmin(id);
                 return Ok(admin);
             }
             catch 
