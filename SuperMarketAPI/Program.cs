@@ -14,7 +14,7 @@ builder.Services.ConfigureLoggerService();
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfiguerServiceManager();
 builder.Services.ConfigureSqlContext(builder.Configuration);
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddApplicationPart(typeof(SuperMarket.Presentation.AssemblyReference).Assembly);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
