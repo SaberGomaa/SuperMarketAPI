@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace SuperMarket.Presentation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[admins]")]
     [ApiController]
     public class AdminController : ControllerBase
     {
+        public AdminController() { }
     }
 }

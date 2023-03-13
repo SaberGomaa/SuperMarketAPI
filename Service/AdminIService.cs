@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using ECommerce.Models;
 using Service.Contracts;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,33 @@ namespace Service
         {
             _logger = logger;
             _repository = repository;
+        }
+
+        public Admin GetAdmin(int id, bool trackChanges)
+        {
+            try
+            {
+                Admin admin = _repository.Admin.GetAdmin(id, trackChanges);
+                return admin;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error in {nameof(GetAdmin)} service method {ex}");
+                throw;
+            }
+        }
+
+        public IEnumerable<Admin> GetAllAdmins(bool trackChanges)
+        {
+            try
+            {
+                var admins = _repository.Admin.GetAllAdmins(trackChanges).ToList();
+                return admins;
+            }catch(Exception ex)
+            {
+                _logger.LogError($"Error in {nameof(GetAllAdmins)} service method {ex}");
+                throw;
+            }
         }
     }
 }

@@ -13,5 +13,14 @@ namespace Repository
         public AdminRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
         }
+
+        public Admin GetAdmin(int id , bool trackChanges) =>
+            FindByCondition(c => c.Id.Equals(id), trackChanges).SingleOrDefault();
+
+        public IEnumerable<Admin> GetAllAdmins(bool trackChanges)=> 
+            FindAll(trackChanges)
+            .OrderBy(c=>c.Name)
+            .ToList();
+
     }
 }
