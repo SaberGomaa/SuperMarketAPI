@@ -1,5 +1,5 @@
 ﻿using Contracts;
-using ECommerce.Models;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

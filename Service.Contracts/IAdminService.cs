@@ -1,4 +1,5 @@
-﻿using ECommerce.Models;
+﻿using Models;
+using Shared.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Service.Contracts
 {
     public interface IAdminService
     {
-        IEnumerable<Admin> GetAllAdmins(bool trackChanges);
-        Admin GetAdmin(int id, bool trackChanges);
+        IEnumerable<AdminDto> GetAllAdmins(bool trackChanges);
+        AdminDto GetAdmin(int id, bool trackChanges);
     }
 }

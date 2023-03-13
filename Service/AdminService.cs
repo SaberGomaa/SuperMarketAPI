@@ -1,6 +1,7 @@
 ﻿using Contracts;
-using ECommerce.Models;
+using Models;
 using Service.Contracts;
+using Shared.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +21,15 @@ namespace Service
             _repository = repository;
         }
 
-        public Admin GetAdmin(int id, bool trackChanges)
+        public AdminDto GetAdmin(int id, bool trackChanges)
         {
             try
             {
-                Admin admin = _repository.Admin.GetAdmin(id, trackChanges);
-                return admin;
+                var admin = _repository.Admin.GetAdmin(id, trackChanges);
+
+                var adminDto = new AdminDto(admin.Id, admin.Name, admin.Email, admin.Password, admin.Address, admin.Img, admin.Phone);
+
+                return adminDto;
             }
             catch (Exception ex)
             {
@@ -34,12 +38,15 @@ namespace Service
             }
         }
 
-        public IEnumerable<Admin> GetAllAdmins(bool trackChanges)
+        public IEnumerable<AdminDto> GetAllAdmins(bool trackChanges)
         {
             try
             {
-                var admins = _repository.Admin.GetAllAdmins(trackChanges).ToList();
-                return admins;
+                var admins = _repository.Admin.GetAllAdmins(trackChanges);
+
+                var adminDto = admins.Select(c=> new AdminDto (c.Id, c.Name , c.Address , c.Password , c.Phone , c.Email , c.Img));
+
+                return adminDto;
             }catch(Exception ex)
             {
                 _logger.LogError($"Error in {nameof(GetAllAdmins)} service method {ex}");
