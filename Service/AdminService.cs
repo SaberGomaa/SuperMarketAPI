@@ -25,36 +25,18 @@ namespace Service
 
         public AdminDto GetAdmin(int id)
         {
-            try
-            {
                 var admin = _repository.Admin.GetAdmin(id);
 
                 var adminDto = _mapper.Map<AdminDto>(admin);
-
                 return adminDto;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Error in {nameof(GetAdmin)} service method {ex}");
-                throw;
-            }
         }
 
         public IEnumerable<AdminDto> GetAllAdmins()
         {
-            try
-            {
                 var admins = _repository.Admin.GetAllAdmins();
 
                 var adminDto = _mapper.Map<IEnumerable< AdminDto>>(admins);
-
                 return adminDto;
-
-            }catch(Exception ex)
-            {
-                _logger.LogError($"Error in {nameof(GetAllAdmins)} service method {ex}");
-                throw;
-            }
         }
     }
 }

@@ -18,35 +18,27 @@ namespace SuperMarket.Presentation.Controllers
         [HttpGet]
         public ActionResult GetAdmins()
         {
-            try
+            var admins = _service.Admin.GetAllAdmins();
+            if (admins is null)
             {
-                var admins = _service.Admin.GetAllAdmins();
-                return Ok(admins);
-            } catch
-            {
-                return StatusCode(500, "Internal Server Error");
+                throw new Exception("Exception");
             }
+            return Ok(admins);
         }
 
-        [Route("getadmin")]
-        [HttpGet]   
+
+        [Route("{id:int}", Name = "getadmin")]
+        [HttpGet]
         public ActionResult GetAdmin(int id)
         {
-            try
+            var admin = _service.Admin.GetAdmin(id);
+            if (admin != null)
             {
-                var admin = _service.Admin.GetAdmin(id);
-                if (admin != null)
-                {
-                    return Ok(admin);
-                }
-                else
-                {
-                    return NotFound();
-                }
+                return Ok(admin);
             }
-            catch
+            else
             {
-                return StatusCode(500, "Internal Server Error");
+                return NotFound();
             }
         }
     }
