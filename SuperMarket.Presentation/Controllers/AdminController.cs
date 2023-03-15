@@ -29,7 +29,7 @@ namespace SuperMarket.Presentation.Controllers
         }
 
         [Route("getadmin")]
-        [HttpGet]
+        [HttpGet]   
         public ActionResult GetAdmin(int id)
         {
             try
