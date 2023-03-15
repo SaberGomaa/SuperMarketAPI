@@ -1,8 +1,12 @@
 using Microsoft.AspNetCore.HttpOverrides;
 using SuperMarketAPI.Extensions;
 using NLog;
+using Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+
 
 // Add services to the container.
 
@@ -22,12 +26,21 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
+
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-    app.UseDeveloperExceptionPage();
-else
+var logger = app.Services.GetRequiredService<ILoggerManager>();
+
+app.ConfigureExceptionHandler(logger);
+
+if (app.Environment.IsProduction())
     app.UseHsts();
+
+//if (app.Environment.IsDevelopment())
+//    app.UseDeveloperExceptionPage();
+//else
+//    app.UseHsts();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
