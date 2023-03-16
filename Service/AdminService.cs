@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Contracts;
+using Entities.Exceptions;
 using Models;
 using Service.Contracts;
 using Shared.DTO;
@@ -25,10 +26,11 @@ namespace Service
 
         public AdminDto GetAdmin(int id)
         {
-                var admin = _repository.Admin.GetAdmin(id);
+            var admin = _repository.Admin.GetAdmin(id);
+            if (admin is null) throw new AdminNotFoundException(id);
 
-                var adminDto = _mapper.Map<AdminDto>(admin);
-                return adminDto;
+            var adminDto = _mapper.Map<AdminDto>(admin);
+            return adminDto;
         }
 
         public IEnumerable<AdminDto> GetAllAdmins()
