@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,12 @@ namespace Repository
         {
         }
 
+        public IEnumerable<Product> GetAllProducts()=>
+            FindAll()
+            .OrderBy(p=>p.Name)
+            .ToList();
+
+        public Product GetProductById(int id)=>
+            FindByCondition(p=> p.Id.Equals(id)).SingleOrDefault();
     }
 }

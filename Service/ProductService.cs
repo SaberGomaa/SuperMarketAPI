@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
 using Contracts;
+using Entities.Exceptions;
+using Models;
 using Service.Contracts;
+using Shared.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +23,28 @@ namespace Service
             _repository = repository;
             _logger = logger;
             _mapper = mapper;
+        }
+
+        public IEnumerable<ProductDto> GetAllProducts()
+        {
+            var products = _repository.Product.GetAllProducts();
+
+            var productsDto = _mapper.Map<IEnumerable<ProductDto>>(products);
+
+            return productsDto;
+        }
+
+        public ProductDto GetProductById(int id)
+        {
+            var product = _repository.Product.GetProductById(id);
+            if (product == null)
+            {
+                throw new ProductNotFoundException(id);
+            }
+
+            var productDto = _mapper.Map<ProductDto>(product);
+
+            return productDto;
         }
     }
 }

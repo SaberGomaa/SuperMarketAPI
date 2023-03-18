@@ -9,6 +9,8 @@ namespace SuperMarketAPI
         public MappingProfile()
         {
             CreateMap<Admin , AdminDto>();
+
+            CreateMap<Product, ProductDto>();
         }
     }
 }
