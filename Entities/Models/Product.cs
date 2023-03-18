@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models
 {
@@ -23,9 +24,13 @@ namespace Models
 
         public string Category { get; set; }
 
+        public int AdminId { get; set; }
+
+        [ForeignKey("AdminId")]
+        public Admin admin { get; set; }
+
         public ICollection<Order> orders { get; set; }
         public ICollection<Cart> carts { get; set; }
-        public ICollection<Admin> admins { get; set; }
 
 
     }

@@ -28,7 +28,6 @@ namespace Repository.Configuration
                              Password = "123",
                              Phone = "01095575989",
                              customer_id = null,
-                             product_id = null
                          }
                     );
         }
