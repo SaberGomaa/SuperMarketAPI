@@ -28,7 +28,7 @@ namespace Service
         public AdminDto CreateAdmin(AdminDtoForCreate admin)
         {
             var adminForCreate = _mapper.Map<Admin>(admin);
-
+            
             _repository.Admin.CreateAdmin(adminForCreate);
             _repository.Save();
  

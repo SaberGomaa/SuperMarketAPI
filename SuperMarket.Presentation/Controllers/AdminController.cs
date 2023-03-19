@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
+using Shared.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,17 @@ namespace SuperMarket.Presentation.Controllers
             {
                 return NotFound();
             }
+        }
+        [Route("CreateAdmin")]
+        [HttpPost]
+        public IActionResult CreateAdmin([FromBody] AdminDtoForCreate adminDtoForCreate)
+        {
+            if(adminDtoForCreate == null) return BadRequest("Can't Insert Null Object in The DataBase ");
+
+            var result = _service.Admin.CreateAdmin(adminDtoForCreate);
+            
+            return CreatedAtRoute(result, result);
+
         }
     }
 }
