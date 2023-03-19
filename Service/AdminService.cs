@@ -24,6 +24,19 @@ namespace Service
             _mapper = mapper;
         }
 
+        
+        public AdminDto CreateAdmin(AdminDtoForCreate admin)
+        {
+            var adminForCreate = _mapper.Map<Admin>(admin);
+
+            _repository.Admin.CreateAdmin(adminForCreate);
+            _repository.Save();
+ 
+            var returnedOBJ = _mapper.Map<AdminDto>(adminForCreate);
+
+            return returnedOBJ;
+        }
+
         public AdminDto GetAdmin(int id)
         {
             var admin = _repository.Admin.GetAdmin(id);

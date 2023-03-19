@@ -12,5 +12,7 @@ namespace Service.Contracts
     {
         IEnumerable<AdminDto> GetAllAdmins();
         AdminDto GetAdmin(int id);
+
+        AdminDto CreateAdmin(AdminDtoForCreate admin);
     }
 }

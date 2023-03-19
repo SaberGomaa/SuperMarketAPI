@@ -11,5 +11,6 @@ namespace Contracts
     {
         IEnumerable<Admin> GetAllAdmins();
         Admin GetAdmin(int id );
+        void CreateAdmin(Admin admin );
     }
 }
