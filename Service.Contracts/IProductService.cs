@@ -10,7 +10,7 @@ namespace Service.Contracts
     public interface IProductService
     {
         IEnumerable<ProductDto> GetAllProducts();
-
         ProductDto GetProductById(int id);
+        ProductDto CreateProduct(ProductDtoForCreation product);
     }
 }

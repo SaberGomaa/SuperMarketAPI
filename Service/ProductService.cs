@@ -25,6 +25,19 @@ namespace Service
             _mapper = mapper;
         }
 
+        public ProductDto CreateProduct(ProductDtoForCreation product)
+        {
+            var prod = _mapper.Map<Product>(product);
+
+            _repository.Product.CreateProduct(prod);
+            _repository.Save();
+
+            var pro = _mapper.Map<ProductDto>(prod);
+
+            return pro;
+
+        }
+
         public IEnumerable<ProductDto> GetAllProducts()
         {
             var products = _repository.Product.GetAllProducts();
@@ -46,5 +59,7 @@ namespace Service
 
             return productDto;
         }
+
+        
     }
 }

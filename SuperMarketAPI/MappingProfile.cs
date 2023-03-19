@@ -14,7 +14,7 @@ namespace SuperMarketAPI
             
             //// Product
             CreateMap<Product, ProductDto>();
-
+            CreateMap<ProductDtoForCreation,Product>();
             
 
         }

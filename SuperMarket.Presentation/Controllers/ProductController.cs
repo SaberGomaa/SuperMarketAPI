@@ -1,6 +1,7 @@
 ﻿using Entities.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
+using Shared.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,17 @@ namespace SuperMarket.Presentation.Controllers
             if (product is null) throw new ProductNotFoundException(id);
 
             return Ok(product);
+        }
+
+        [Route("CreateProduct")]
+        [HttpPost]
+        public IActionResult CreateProdutc([FromBody] ProductDtoForCreation product)
+        {
+            if (product is null) return BadRequest("Can't Insert Null Object at DataBase ");
+
+            var prod = _service.Product.CreateProduct(product);
+
+            return CreatedAtRoute(prod, prod);
         }
     }
 }

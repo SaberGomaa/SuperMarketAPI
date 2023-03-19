@@ -15,6 +15,9 @@ namespace Repository
         {
         }
 
+        public void CreateProduct(Product product) =>
+            Create(product);
+
         public IEnumerable<Product> GetAllProducts()=>
             FindAll()
             .OrderBy(p=>p.Name)
