@@ -53,5 +53,17 @@ namespace SuperMarket.Presentation.Controllers
             return CreatedAtRoute(result, result);
 
         }
+
+        [Route("{id:int}",Name ="DeleteAdmin") ]
+        [HttpDelete]
+        public IActionResult DeleteAdmin(int id)
+        {
+            if (id == null) return BadRequest("Can't Delete Null Obj ..");
+
+            var admin = _service.Admin.DeleteAdmin(id);
+
+            return Ok(admin);
+        }
+
     }
 }

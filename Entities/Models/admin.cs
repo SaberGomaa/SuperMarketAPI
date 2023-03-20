@@ -19,5 +19,7 @@ namespace Models
         [ForeignKey("customer_id")]
         public Customer? customer { get; set; }
 
+        ICollection<Product> products { get; set; }
+
     }
 }

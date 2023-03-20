@@ -16,6 +16,8 @@ namespace Repository
 
         public void CreateAdmin(Admin admin) => Create(admin);
 
+        public void DeleteAdmin(Admin admin)=>Delete(admin);
+
         public Admin GetAdmin(int id ) =>
             FindByCondition(c => c.Id.Equals(id)).SingleOrDefault();
 

@@ -37,9 +37,22 @@ namespace Service
             return returnedOBJ;
         }
 
+        public AdminDto DeleteAdmin(int id)
+        {
+            var admin = _repository.Admin.GetAdmin(id);
+            if (admin is null) throw  new AdminNotFoundException(id);
+            
+            _repository.Admin.DeleteAdmin(admin);
+            _repository.Save();
+
+            var returnOBJ = _mapper.Map<AdminDto>(admin); 
+            return returnOBJ;
+        }
+
         public AdminDto GetAdmin(int id)
         {
             var admin = _repository.Admin.GetAdmin(id);
+            
             if (admin is null) throw new AdminNotFoundException(id);
 
             var adminDto = _mapper.Map<AdminDto>(admin);

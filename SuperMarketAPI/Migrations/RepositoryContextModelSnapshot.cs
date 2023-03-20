@@ -316,13 +316,13 @@ namespace SuperMarketAPI.Migrations
 
             modelBuilder.Entity("Models.Product", b =>
                 {
-                    b.HasOne("Models.Admin", "Admin")
+                    b.HasOne("Models.Admin", "admin")
                         .WithMany()
                         .HasForeignKey("AdminId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Admin");
+                    b.Navigation("admin");
                 });
 
             modelBuilder.Entity("Models.contact", b =>
