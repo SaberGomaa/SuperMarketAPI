@@ -12,5 +12,6 @@ namespace Service.Contracts
         IEnumerable<ProductDto> GetAllProducts();
         ProductDto GetProductById(int id);
         ProductDto CreateProduct(ProductDtoForCreation product);
+        ProductDto DeleteProduct(int id);
     }
 }

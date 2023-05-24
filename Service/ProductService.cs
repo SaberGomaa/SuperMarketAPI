@@ -60,6 +60,25 @@ namespace Service
             return productDto;
         }
 
+        public ProductDto DeleteProduct(int id)
+        {
+            var prodoct = _repository.Product.GetProductById(id);
+
+            if(prodoct == null)
+            {
+                throw new ProductNotFoundException(id);
+            }
+            else
+            {
+                _repository.Product.DeleteProduct(prodoct);
+                _repository.Save();
+            }
+
+            var returnedProduct = _mapper.Map<ProductDto>(prodoct);
+
+            return returnedProduct;
+
+        }
         
     }
 }

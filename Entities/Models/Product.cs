@@ -12,9 +12,9 @@ namespace Models
         public string Name { get; set; }
         [Required(ErrorMessage = "*")]
         public double Price { get; set; }
+
         [Required(ErrorMessage = "*")]
         public string  Img { get; set; }
-
         public string Color { get; set; } // drop downlist Options
         public string Size { get; set; } // drop downlist Options
        

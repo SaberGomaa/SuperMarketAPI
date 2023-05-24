@@ -12,5 +12,6 @@ namespace Contracts
         IEnumerable<Product> GetAllProducts();
         Product GetProductById(int id);
         void CreateProduct(Product product);
+        void DeleteProduct(Product product);
     }
 }
