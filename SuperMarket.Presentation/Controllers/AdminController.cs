@@ -3,11 +3,15 @@ using Service.Contracts;
 using Shared.DTO;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 namespace SuperMarket.Presentation.Controllers
 {
+    //[ApiExplorerSettings(IgnoreApi = true)]
+    //To hide endpoint from Swagger 
+
     [Route("api/admin")]
     [ApiController]
     public class AdminController : ControllerBase
@@ -42,6 +46,7 @@ namespace SuperMarket.Presentation.Controllers
                 return NotFound();
             }
         }
+
         [Route("CreateAdmin")]
         [HttpPost]
         public IActionResult CreateAdmin([FromBody] AdminDtoForCreate adminDtoForCreate)
