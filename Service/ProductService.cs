@@ -25,12 +25,12 @@ namespace Service
             _mapper = mapper;
         }
 
-        public ProductDto CreateProduct(ProductDtoForCreation product)
+        public async Task<ProductDto> CreateProduct(ProductDtoForCreation product)
         {
             var prod = _mapper.Map<Product>(product);
 
             _repository.Product.CreateProduct(prod);
-            _repository.SaveAsync();
+            await _repository.SaveAsync();
 
             var pro = _mapper.Map<ProductDto>(prod);
 
@@ -38,18 +38,18 @@ namespace Service
 
         }
 
-        public IEnumerable<ProductDto> GetAllProducts()
+        public async Task<IEnumerable<ProductDto>> GetAllProducts()
         {
-            var products = _repository.Product.GetAllProducts();
+            var products =await _repository.Product.GetAllProducts();
 
             var productsDto = _mapper.Map<IEnumerable<ProductDto>>(products);
 
             return productsDto;
         }
 
-        public ProductDto GetProductById(int id)
+        public async Task<ProductDto> GetProductById(int id)
         {
-            var product = _repository.Product.GetProductById(id);
+            var product = await _repository.Product.GetProductById(id);
             if (product == null)
             {
                 throw new ProductNotFoundException(id);
@@ -60,9 +60,9 @@ namespace Service
             return productDto;
         }
 
-        public ProductDto DeleteProduct(int id)
+        public async Task<ProductDto> DeleteProduct(int id)
         {
-            var prodoct = _repository.Product.GetProductById(id);
+            var prodoct = await _repository.Product.GetProductById(id);
 
             if(prodoct == null)
             {
@@ -71,7 +71,7 @@ namespace Service
             else
             {
                 _repository.Product.DeleteProduct(prodoct);
-                _repository.SaveAsync();
+                await _repository.SaveAsync();
             }
 
             var returnedProduct = _mapper.Map<ProductDto>(prodoct);

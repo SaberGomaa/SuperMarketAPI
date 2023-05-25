@@ -30,7 +30,7 @@ namespace Service
             var adminForCreate = _mapper.Map<Admin>(admin);
             
             _repository.Admin.CreateAdmin(adminForCreate);
-            _repository.SaveAsync();
+            await _repository.SaveAsync();
  
             var returnedOBJ = _mapper.Map<AdminDto>(adminForCreate);
 
@@ -43,7 +43,7 @@ namespace Service
             if (admin is null) throw  new AdminNotFoundException(id);
             
             _repository.Admin.DeleteAdmin(admin);
-            _repository.SaveAsync();
+            await _repository.SaveAsync();
 
             var returnOBJ = _mapper.Map<AdminDto>(admin); 
             return returnOBJ;

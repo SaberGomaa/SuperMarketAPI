@@ -23,12 +23,12 @@ namespace Repository
             Delete(product);
         }
 
-        public IEnumerable<Product> GetAllProducts()=>
-            FindAll()
+        public async Task<IEnumerable<Product>> GetAllProducts()=>
+           await FindAll()
             .OrderBy(p=>p.Name)
-            .ToList();
+            .ToListAsync();
 
-        public Product GetProductById(int id)=>
-            FindByCondition(p=> p.Id.Equals(id)).SingleOrDefault();
+        public async Task<Product> GetProductById(int id)=>
+           await FindByCondition(p=> p.Id.Equals(id)).SingleOrDefaultAsync();
     }
 }

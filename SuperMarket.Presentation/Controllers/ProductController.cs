@@ -23,9 +23,9 @@ namespace SuperMarket.Presentation.Controllers
 
         [Route("GetProducts")]
         [HttpGet]
-        public ActionResult GetProducts()
+        public async Task<IActionResult> GetProducts()
         {
-            var products = _service.Product.GetAllProducts();
+            var products = await _service.Product.GetAllProducts();
 
             if (products is null) throw new Exception("No Products Found");
 
@@ -34,9 +34,9 @@ namespace SuperMarket.Presentation.Controllers
 
         [Route("{id:int}", Name = "GetProductById")]
         [HttpGet]
-        public ActionResult GetProductById(int id)
+        public async Task<ActionResult> GetProductById(int id)
         {
-            var product = _service.Product.GetProductById(id);
+            var product = await _service.Product.GetProductById(id);
             if (product is null) throw new ProductNotFoundException(id);
 
             return Ok(product);
@@ -44,24 +44,24 @@ namespace SuperMarket.Presentation.Controllers
 
         [Route("CreateProduct")]
         [HttpPost]
-        public IActionResult CreateProdutc([FromBody] ProductDtoForCreation product)
+        public async Task<IActionResult> CreateProdutc([FromBody] ProductDtoForCreation product)
         {
             if (product is null) return BadRequest("Can't Insert Null Object at DataBase ");
 
-            var prod = _service.Product.CreateProduct(product);
+            var prod = await _service.Product.CreateProduct(product);
 
             return CreatedAtRoute(prod, prod);
         }
 
         [Route("{id:int}", Name ="DeleteProduct")]
         [HttpDelete]
-        public IActionResult DeleteProduct(int id)
+        public async  Task<IActionResult> DeleteProduct(int id)
         {
             if (id == null)
             {
                 return BadRequest("Can't Delete Null Obj ..");
             }
-            var product = _service.Product.DeleteProduct(id);
+            var product = await _service.Product.DeleteProduct(id);
 
             return Ok(product);
         }
