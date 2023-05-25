@@ -30,7 +30,7 @@ namespace Service
             var prod = _mapper.Map<Product>(product);
 
             _repository.Product.CreateProduct(prod);
-            _repository.Save();
+            _repository.SaveAsync();
 
             var pro = _mapper.Map<ProductDto>(prod);
 
@@ -71,7 +71,7 @@ namespace Service
             else
             {
                 _repository.Product.DeleteProduct(prodoct);
-                _repository.Save();
+                _repository.SaveAsync();
             }
 
             var returnedProduct = _mapper.Map<ProductDto>(prodoct);

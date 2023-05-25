@@ -25,33 +25,33 @@ namespace Service
         }
 
         
-        public AdminDto CreateAdmin(AdminDtoForCreate admin)
+        public async Task<AdminDto> CreateAdmin(AdminDtoForCreate admin)
         {
             var adminForCreate = _mapper.Map<Admin>(admin);
             
             _repository.Admin.CreateAdmin(adminForCreate);
-            _repository.Save();
+            _repository.SaveAsync();
  
             var returnedOBJ = _mapper.Map<AdminDto>(adminForCreate);
 
             return returnedOBJ;
         }
 
-        public AdminDto DeleteAdmin(int id)
+        public async Task<AdminDto> DeleteAdmin(int id)
         {
-            var admin = _repository.Admin.GetAdmin(id);
+            var admin =  await _repository.Admin.GetAdmin(id);
             if (admin is null) throw  new AdminNotFoundException(id);
             
             _repository.Admin.DeleteAdmin(admin);
-            _repository.Save();
+            _repository.SaveAsync();
 
             var returnOBJ = _mapper.Map<AdminDto>(admin); 
             return returnOBJ;
         }
 
-        public AdminDto GetAdmin(int id)
+        public async Task<AdminDto> GetAdmin(int id)
         {
-            var admin = _repository.Admin.GetAdmin(id);
+            var admin = await _repository.Admin.GetAdmin(id);
             
             if (admin is null) throw new AdminNotFoundException(id);
 
@@ -59,9 +59,9 @@ namespace Service
             return adminDto;
         }
 
-        public IEnumerable<AdminDto> GetAllAdmins()
+        public async Task<IEnumerable<AdminDto>> GetAllAdmins()
         {
-                var admins = _repository.Admin.GetAllAdmins();
+                var admins =  await _repository.Admin.GetAllAdmins();
 
                 var adminDto = _mapper.Map<IEnumerable< AdminDto>>(admins);
                 return adminDto;

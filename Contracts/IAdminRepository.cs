@@ -9,8 +9,8 @@ namespace Contracts
 {
     public interface IAdminRepository
     {
-        IEnumerable<Admin> GetAllAdmins();
-        Admin GetAdmin(int id );
+        Task<IEnumerable<Admin>> GetAllAdmins();
+        Task<Admin> GetAdmin(int id );
         void CreateAdmin(Admin admin );
         void DeleteAdmin(Admin admin );
     }

@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using System;
 using System.Collections.Generic;
@@ -18,13 +19,13 @@ namespace Repository
 
         public void DeleteAdmin(Admin admin)=>Delete(admin);
 
-        public Admin GetAdmin(int id ) =>
-            FindByCondition(c => c.Id.Equals(id)).SingleOrDefault();
+        public async Task<Admin> GetAdmin(int id ) =>
+            await FindByCondition(c => c.Id.Equals(id)).SingleOrDefaultAsync();
 
-        public IEnumerable<Admin> GetAllAdmins()=> 
-            FindAll()
+        public async Task<IEnumerable<Admin>>  GetAllAdmins()=> 
+             await  FindAll()
             .OrderBy(c=>c.Name)
-            .ToList();
+            .ToListAsync();
 
     }
 }

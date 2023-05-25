@@ -10,10 +10,9 @@ namespace Service.Contracts
 {
     public interface IAdminService
     {
-        IEnumerable<AdminDto> GetAllAdmins();
-        AdminDto GetAdmin(int id);
-        AdminDto CreateAdmin(AdminDtoForCreate admin);
-
-        AdminDto DeleteAdmin(int id);
+        Task<IEnumerable<AdminDto>> GetAllAdmins();
+        Task<AdminDto> GetAdmin(int id);
+        Task<AdminDto> CreateAdmin(AdminDtoForCreate admin);
+        Task<AdminDto> DeleteAdmin(int id);
     }
 }

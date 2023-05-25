@@ -15,7 +15,7 @@ namespace Contracts
         public IOrderRepository Order { get; }
         public IProductRepository Product { get; }
 
-        void Save();
+        Task SaveAsync();
 
     }
 }
