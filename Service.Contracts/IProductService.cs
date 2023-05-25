@@ -1,4 +1,5 @@
 ﻿using Shared.DTO;
+using Shared.RequestFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Service.Contracts
 {
     public interface IProductService
     {
-        Task<IEnumerable<ProductDto>> GetAllProducts();
+        Task<IEnumerable<ProductDto>> GetAllProducts(ProductParameters productParameters);
         Task<ProductDto> GetProductById(int id);
         Task<ProductDto> CreateProduct(ProductDtoForCreation product);
         Task<ProductDto> DeleteProduct(int id);

@@ -4,6 +4,7 @@ using Entities.Exceptions;
 using Models;
 using Service.Contracts;
 using Shared.DTO;
+using Shared.RequestFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,9 +39,9 @@ namespace Service
 
         }
 
-        public async Task<IEnumerable<ProductDto>> GetAllProducts()
+        public async Task<IEnumerable<ProductDto>> GetAllProducts(ProductParameters productParameters)
         {
-            var products =await _repository.Product.GetAllProducts();
+            var products =await _repository.Product.GetAllProducts(productParameters);
 
             var productsDto = _mapper.Map<IEnumerable<ProductDto>>(products);
 

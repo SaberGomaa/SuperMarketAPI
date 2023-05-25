@@ -1,15 +1,11 @@
 ﻿using Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Shared.RequestFeatures;
 
 namespace Contracts
 {
     public interface IProductRepository
     {
-        Task<IEnumerable<Product>> GetAllProducts();
+        Task<IEnumerable<Product>> GetAllProducts(ProductParameters productParameters);
         Task<Product> GetProductById(int id);
         void CreateProduct(Product product);
         void DeleteProduct(Product product);

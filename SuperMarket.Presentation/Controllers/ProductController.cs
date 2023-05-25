@@ -2,11 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Shared.RequestFeatures;
 
 namespace SuperMarket.Presentation.Controllers
 {
@@ -23,9 +19,9 @@ namespace SuperMarket.Presentation.Controllers
 
         [Route("GetProducts")]
         [HttpGet]
-        public async Task<IActionResult> GetProducts()
+        public async Task<IActionResult> GetProducts([FromQuery]ProductParameters productParameters)
         {
-            var products = await _service.Product.GetAllProducts();
+            var products = await _service.Product.GetAllProducts(productParameters);
 
             if (products is null) throw new Exception("No Products Found");
 

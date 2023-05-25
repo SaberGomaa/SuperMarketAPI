@@ -1,6 +1,7 @@
 ﻿using Contracts;
 using Microsoft.EntityFrameworkCore;
 using Models;
+using Shared.RequestFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,9 +24,11 @@ namespace Repository
             Delete(product);
         }
 
-        public async Task<IEnumerable<Product>> GetAllProducts()=>
+        public async Task<IEnumerable<Product>> GetAllProducts(ProductParameters productParameters) =>
            await FindAll()
             .OrderBy(p=>p.Name)
+            .Skip((productParameters.PageNumber - 1) * productParameters.PageSize)
+            .Take(productParameters.PageSize)
             .ToListAsync();
 
         public async Task<Product> GetProductById(int id)=>
