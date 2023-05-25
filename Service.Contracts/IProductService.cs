@@ -10,7 +10,7 @@ namespace Service.Contracts
 {
     public interface IProductService
     {
-        Task<IEnumerable<ProductDto>> GetAllProducts(ProductParameters productParameters);
+        Task<(IEnumerable<ProductDto> productDtos , MetaData MetaData)> GetAllProducts(ProductParameters productParameters);
         Task<ProductDto> GetProductById(int id);
         Task<ProductDto> CreateProduct(ProductDtoForCreation product);
         Task<ProductDto> DeleteProduct(int id);

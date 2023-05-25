@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DTO;
 using Shared.RequestFeatures;
+using System.Text.Json;
 
 namespace SuperMarket.Presentation.Controllers
 {
@@ -21,11 +22,11 @@ namespace SuperMarket.Presentation.Controllers
         [HttpGet]
         public async Task<IActionResult> GetProducts([FromQuery]ProductParameters productParameters)
         {
-            var products = await _service.Product.GetAllProducts(productParameters);
+            var pagedResult = await _service.Product.GetAllProducts(productParameters);
 
-            if (products is null) throw new Exception("No Products Found");
+            Response.Headers.Add("X-Pagination",JsonSerializer.Serialize(pagedResult.MetaData));
 
-            return Ok(products);
+            return Ok(pagedResult.productDtos);
         }
 
         [Route("{id:int}", Name = "GetProductById")]

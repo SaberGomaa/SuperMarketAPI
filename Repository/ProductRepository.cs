@@ -24,12 +24,13 @@ namespace Repository
             Delete(product);
         }
 
-        public async Task<IEnumerable<Product>> GetAllProducts(ProductParameters productParameters) =>
-           await FindAll()
-            .OrderBy(p=>p.Name)
-            .Skip((productParameters.PageNumber - 1) * productParameters.PageSize)
-            .Take(productParameters.PageSize)
-            .ToListAsync();
+        public async Task<PagedList<Product>> GetAllProducts(ProductParameters productParameters)
+        {
+            var products = await FindAll().OrderBy(p => p.Name).ToListAsync();
+
+            return PagedList<Product>
+                .ToPagedList(products, productParameters.PageNumber, productParameters.PageSize);
+        }
 
         public async Task<Product> GetProductById(int id)=>
            await FindByCondition(p=> p.Id.Equals(id)).SingleOrDefaultAsync();

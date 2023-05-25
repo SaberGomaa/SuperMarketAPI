@@ -39,13 +39,13 @@ namespace Service
 
         }
 
-        public async Task<IEnumerable<ProductDto>> GetAllProducts(ProductParameters productParameters)
+        public async Task<(IEnumerable<ProductDto> productDtos , MetaData MetaData)> GetAllProducts(ProductParameters productParameters)
         {
-            var products =await _repository.Product.GetAllProducts(productParameters);
+            var productsWithMetaData = await _repository.Product.GetAllProducts(productParameters);
 
-            var productsDto = _mapper.Map<IEnumerable<ProductDto>>(products);
+            var productsDto = _mapper.Map<IEnumerable<ProductDto>>(productsWithMetaData);
 
-            return productsDto;
+            return ( productsDto,productsWithMetaData.MetaData);
         }
 
         public async Task<ProductDto> GetProductById(int id)
