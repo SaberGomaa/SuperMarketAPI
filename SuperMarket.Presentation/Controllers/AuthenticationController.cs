@@ -1,12 +1,6 @@
-﻿using Microsoft.AspNetCore.Hosting.Server;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SuperMarket.Presentation.Controllers
 {
@@ -33,6 +27,15 @@ namespace SuperMarket.Presentation.Controllers
                 return BadRequest(ModelState);
             }
             return StatusCode(201);
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user)
+        {
+            if (!await _service.Authentication.ValidateUser(user))
+                return Unauthorized();
+
+            return Ok(new { Token = await _service.Authentication.CreateToken() });
         }
     }
 }

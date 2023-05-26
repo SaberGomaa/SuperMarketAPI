@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DTO;
@@ -19,6 +19,7 @@ namespace SuperMarket.Presentation.Controllers
     
         [Route("getadmins")]
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult> GetAdmins()
         {
             var admins = await _service.Admin.GetAllAdmins();
@@ -28,6 +29,7 @@ namespace SuperMarket.Presentation.Controllers
             }
             return Ok(admins);
         }
+
 
         [Route("{id:int}", Name = "getadmin")]
         [HttpGet]
