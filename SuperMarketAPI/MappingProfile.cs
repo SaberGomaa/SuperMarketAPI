@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Entities.Models;
 using Models;
 using Shared.DTO;
 
@@ -15,7 +16,9 @@ namespace SuperMarketAPI
             //// Product
             CreateMap<Product, ProductDto>();
             CreateMap<ProductDtoForCreation,Product>();
-            
+
+            // Authentication
+            CreateMap<UserForRegistrationDto, User>();
 
         }
     }

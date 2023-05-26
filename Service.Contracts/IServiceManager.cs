@@ -8,11 +8,12 @@ namespace Service.Contracts
 {
     public interface IServiceManager
     {
-        public IAdminService Admin { get; }
-        public ICartService Cart { get; }
-        public IContactService Contact { get; }
-        public ICustomerService Customer { get; }
-        public IOrderService Order { get; }
-        public IProductService Product { get; }
+        IAdminService Admin { get; }
+        ICartService Cart { get; }
+        IContactService Contact { get; }
+        ICustomerService Customer { get; }
+        IOrderService Order { get; }
+        IProductService Product { get; }
+        IAuthenticationService Authentication { get; }
     }
 }
