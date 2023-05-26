@@ -19,7 +19,7 @@ namespace SuperMarket.Presentation.Controllers
     
         [Route("getadmins")]
         [HttpGet]
-        [Authorize]
+        [Authorize()]
         public async Task<ActionResult> GetAdmins()
         {
             var admins = await _service.Admin.GetAllAdmins();
