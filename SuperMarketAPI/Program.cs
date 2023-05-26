@@ -24,6 +24,8 @@ builder.Services.AddControllers().AddApplicationPart(typeof(SuperMarket.Presenta
 builder.Services.Configure<ApiBehaviorOptions>(options => {
     options.SuppressModelStateInvalidFilter = true;
 }) ;
+builder.Services.AddAuthentication();
+builder.Services.ConfigureIdentity();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -59,7 +61,7 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
     ForwardedHeaders = ForwardedHeaders.All
 });
 app.UseCors("CorsPolicy");
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

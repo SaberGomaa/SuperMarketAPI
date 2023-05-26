@@ -1,21 +1,20 @@
 ﻿using Models;
 using Microsoft.EntityFrameworkCore;
 using Repository.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Entities.Models;
 
 namespace Repository
 {
-    public class RepositoryContext : DbContext
+    public class RepositoryContext : IdentityDbContext<User>
     {
         public RepositoryContext(DbContextOptions options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
             builder.ApplyConfiguration(new AdminsConfguration());
+            builder.ApplyConfiguration(new RoleConfiguration());
         }
         public DbSet<Admin> admins { get; set; }
         public DbSet<Customer> customers { get; set; }
