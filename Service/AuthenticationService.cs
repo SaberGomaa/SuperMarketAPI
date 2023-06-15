@@ -48,7 +48,6 @@ namespace Service
                 _logger.LogWarn($"{nameof(ValidateUser)}: Authentication failed. Wrong username or password.");
             return result;
         }
-
         public async Task<string> CreateToken()
         {
             var signingCredentials = GetSigningCredentials();
@@ -56,10 +55,9 @@ namespace Service
             var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
             return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
         }
-
         private SigningCredentials GetSigningCredentials()
         {
-            var key = Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("MAHER"));
+            var key = Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("SABER"));
             var secret = new SymmetricSecurityKey(key);
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
         }
@@ -67,10 +65,9 @@ namespace Service
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, _user.UserName),            };
-
+                new Claim(ClaimTypes.Name, _user.UserName)
+            };
             var roles = await _userManager.GetRolesAsync(_user);
-
             foreach (var role in roles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
@@ -86,9 +83,9 @@ namespace Service
             audience: jwtSettings["validAudience"],
             claims: claims,
             expires: DateTime.Now.AddMinutes(Convert.ToDouble(jwtSettings["expires"])),
-            signingCredentials: signingCredentials
-            );
+            signingCredentials: signingCredentials);
             return tokenOptions;
         }
+
     }
 }

@@ -19,7 +19,7 @@ namespace SuperMarket.Presentation.Controllers
     
         [Route("getadmins")]
         [HttpGet]
-        [Authorize()]
+        [Authorize]
         public async Task<ActionResult> GetAdmins()
         {
             var admins = await _service.Admin.GetAllAdmins();
@@ -30,7 +30,7 @@ namespace SuperMarket.Presentation.Controllers
             return Ok(admins);
         }
 
-
+        [Authorize]
         [Route("{id:int}", Name = "getadmin")]
         [HttpGet]
         public async Task<ActionResult> GetAdmin(int id)
