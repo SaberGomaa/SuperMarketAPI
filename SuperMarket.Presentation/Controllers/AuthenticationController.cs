@@ -35,7 +35,10 @@ namespace SuperMarket.Presentation.Controllers
             if (!await _service.Authentication.ValidateUser(user))
                 return Unauthorized();
 
-            return Ok(new { Token = await _service.Authentication.CreateToken() });
+            var tokenDto = await _service.Authentication
+            .CreateToken(populateExp: true);
+
+            return Ok(tokenDto);
         }
     }
 }

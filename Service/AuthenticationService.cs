@@ -8,6 +8,7 @@ using Service.Contracts;
 using Shared.DTO;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Service
@@ -20,8 +21,8 @@ namespace Service
         private readonly IConfiguration _configuration;
         private User? _user;
 
-        public AuthenticationService(ILoggerManager logger , IMapper mapper 
-            , IConfiguration configuration , UserManager<User> userManager)
+        public AuthenticationService(ILoggerManager logger, IMapper mapper
+            , IConfiguration configuration, UserManager<User> userManager)
         {
             _logger = logger;
             _mapper = mapper;
@@ -32,28 +33,34 @@ namespace Service
         public async Task<IdentityResult> RegisterUser(UserForRegistrationDto userForRegistration)
         {
             var user = _mapper.Map<User>(userForRegistration);
-            
-            var result = await _userManager.CreateAsync(user,userForRegistration.Password);
-          
+
+            var result = await _userManager.CreateAsync(user, userForRegistration.Password);
+
             if (result.Succeeded) await _userManager.AddToRolesAsync(user, userForRegistration.Roles);
-            
+
             return result;
         }
 
         public async Task<bool> ValidateUser(UserForAuthenticationDto userForAuth)
         {
             _user = await _userManager.FindByNameAsync(userForAuth.UserName);
-            var result = (_user != null && await _userManager.CheckPasswordAsync(_user,userForAuth.Password));
+            var result = (_user != null && await _userManager.CheckPasswordAsync(_user, userForAuth.Password));
             if (!result)
                 _logger.LogWarn($"{nameof(ValidateUser)}: Authentication failed. Wrong username or password.");
             return result;
         }
-        public async Task<string> CreateToken()
+        public async Task<TokenDto> CreateToken(bool populateExp)
         {
             var signingCredentials = GetSigningCredentials();
             var claims = await GetClaims();
             var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
-            return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+            var refreshToken = GenerateRefreshToken();
+            _user.RefreshToken = refreshToken;
+            if (populateExp)
+                _user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
+            await _userManager.UpdateAsync(_user);
+            var accessToken = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+            return new TokenDto(accessToken, refreshToken);
         }
         private SigningCredentials GetSigningCredentials()
         {
@@ -87,5 +94,41 @@ namespace Service
             return tokenOptions;
         }
 
+        private ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
+        {
+            var jwtSettings = _configuration.GetSection("JwtSettings");
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateAudience = true,
+                ValidateIssuer = true,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("SABER"))),
+                ValidateLifetime = true,
+                ValidIssuer = jwtSettings["validIssuer"],
+                ValidAudience = jwtSettings["validAudience"]
+            };
+            var tokenHandler = new JwtSecurityTokenHandler();
+            SecurityToken securityToken;
+            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out
+            securityToken);
+            var jwtSecurityToken = securityToken as JwtSecurityToken;
+            if (jwtSecurityToken == null ||
+            !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,
+            StringComparison.InvariantCultureIgnoreCase))
+            {
+                throw new SecurityTokenException("Invalid token");
+            }
+            return principal;
+        }
+        private string GenerateRefreshToken()
+        {
+            var randomNumber = new byte[32];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(randomNumber);
+                return Convert.ToBase64String(randomNumber);
+            }
+        }
     }
 }
